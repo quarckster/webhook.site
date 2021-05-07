@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   #annotations:
@@ -43,10 +43,15 @@ spec:
           value: redis
         - name: REDIS_HOST
           value: redis:6379
-        image: fredsted/webhook.site
+        image: docker-registry.default.svc:5000/qe-webhook/webhook.site
         name: webhook
         ports:
         - containerPort: 80
-        resources: {}
+        resources: 
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
       restartPolicy: Always
-status: {}
