@@ -55,3 +55,4 @@ spec:
             cpu: 100m
             memory: 300Mi
       restartPolicy: Always
+status: {}
