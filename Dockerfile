@@ -45,9 +45,10 @@ RUN composer global require hirak/prestissimo && \
     chmod +x /tmp/s6-overlay-amd64-installer && \
     /tmp/s6-overlay-amd64-installer / && \
     rm -f /tmp/s6-overlay-amd64-installer && \
-    sed -i "/user  nginx;/d" /etc/nginx/nginx.conf && \ 
+    sed -i "/user  nginx;/d" /etc/nginx/nginx.conf && \
+    sed -i "s/\/var\/run\/nginx.pid/\/tmp\/nginx.pid/" /etc/nginx/nginx.conf && \
     chown -LR 1001:0 /var && \
-    chgrp -LR 0 /var/ && \
+    chgrp -LR 0 /var && \
     find -L /var/ -exec chmod -R a+rwx {} \;
 
 USER 1001
