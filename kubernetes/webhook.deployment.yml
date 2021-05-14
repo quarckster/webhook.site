@@ -7,8 +7,8 @@ metadata:
   name: webhook
 spec:
   replicas: 1
-  strategy: 
-    type: RollingUpdate
+  lookupPolicy:
+    local: true
   selector:
     matchLabels:
       name: webhook

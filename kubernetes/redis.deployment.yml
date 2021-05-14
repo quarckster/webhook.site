@@ -1,22 +1,32 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: redis
   name: redis
-  namespace: webhook
 spec:
   replicas: 1
+  lookupPolicy:
+    local: true
   strategy: {}
+  selector:
+    matchLabels:
+      name: redis
   template:
     metadata:
       labels:
-        app: redis
+        name: redis
     spec:
       containers:
-      - image: redis:alpine
+      - image: registry.redhat.io/rhscl/redis-5-rhel7
         name: redis
-        resources: {}
+        resources: 
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
         ports:
           - protocol: TCP
             containerPort: 6379

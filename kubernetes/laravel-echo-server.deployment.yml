@@ -9,6 +9,8 @@ spec:
     matchLabels:
       name: laravel-echo-server
   replicas: 1
+  lookupPolicy:
+    local: true
   revisionHistoryLimit: 10
   strategy: {}
   template:
@@ -50,5 +52,7 @@ spec:
             value: 0.0.0.0
           - name: LARAVEL_ECHO_SERVER_PORT
             value: "6001"
+          - name: S6_READ_ONLY_ROOT
+            value: "1"
       restartPolicy: Always
 status: {}
